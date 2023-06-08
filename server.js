@@ -22,21 +22,9 @@ app.get('/data/categories.json', (req, res) => {
   res.sendFile(path.join(__dirname, '/data/categories.json'));
 });
 
-// Handle the routes for blog functionality
-app.get('/about', (req, res) => {
-  res.sendFile(path.join(__dirname, '/views/about.html'));
-});
-
-app.get('/categories', (req, res) => {
-  res.sendFile(path.join(__dirname, '/views/categories.html'));
-});
-
-app.get('/posts', (req, res) => {
-  res.sendFile(path.join(__dirname, '/views/posts.html'));
-});
-
-app.get('/posts/add', (req, res) => {
-  res.sendFile(path.join(__dirname, '/views/addPost.html'));
+// Handle the requests for the blog functionality
+app.get('/blog', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views/blog.html'));
 });
 
 // Start the server
