@@ -68,34 +68,11 @@ app.get('/posts/add', (req, res) => {
   res.sendFile(path.join(__dirname, 'views/addPost.html'));
 });
 
-// Generate a complete HTML page with the given content
-function generatePage(content) {
-  return `
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <title>My Blog</title>
-      <link rel="stylesheet" href="/styles.css">
-    </head>
-    <body>
-      <header>
-        <h1>My Blog</h1>
-        <nav>
-          <a href="/about">About</a>
-          <a href="/categories">Categories</a>
-          <a href="/posts">Posts</a>
-          <a href="/posts/add">Add Post</a>
-        </nav>
-      </header>
-      <main>
-        <div class="col-md-9">
-          ${content}
-        </div>
-      </main>
-    </body>
-    </html>
-  `;
-}
+// Handle all other routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views/about.html'));
+});
+
 
 // Start the server
 app.listen(PORT, () => {
