@@ -5,21 +5,12 @@ const fs = require('fs');
 const app = express();
 const PORT = 5500;
 
-// Serve static files from the "views" directory
-app.use(express.static(path.join(__dirname, 'views')));
-app.use(express.static(path.join(__dirname, 'data')));
-
-// Serve the about page
+// Serve the about.html file
 app.get('/about', (req, res) => {
   res.sendFile(path.join(__dirname, 'views/about.html'));
 });
 
-// Serve the add post page
-app.get('/posts/add', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views/addPost.html'));
-});
-
-// API endpoint to retrieve categories
+// Serve the categories.json file
 app.get('/categories', (req, res) => {
   const categoriesPath = path.join(__dirname, 'data/categories.json');
   fs.readFile(categoriesPath, 'utf8', (err, data) => {
@@ -28,14 +19,12 @@ app.get('/categories', (req, res) => {
       res.status(500).send('Internal Server Error');
     } else {
       const categories = JSON.parse(data);
-      const categoryList = categories.map(category => `<li>${category.category}</li>`).join('');
-      const html = generatePage(`<ul>${categoryList}</ul>`);
-      res.send(html);
+      res.json(categories);
     }
   });
 });
 
-// API endpoint to retrieve posts
+// Serve the posts.json file
 app.get('/posts', (req, res) => {
   const postsPath = path.join(__dirname, 'data/posts.json');
   fs.readFile(postsPath, 'utf8', (err, data) => {
@@ -44,26 +33,22 @@ app.get('/posts', (req, res) => {
       res.status(500).send('Internal Server Error');
     } else {
       const posts = JSON.parse(data);
-      const postList = posts.map(post => `
-        <li class="list-group-item">
-          <h3>${post.title}</h3>
-          <p>${post.body}</p>
-          <p>Posted on: ${post.postDate}</p>
-          <p>Category: ${post.category}</p>
-        </li>
-      `).join('');
-      const html = generatePage(`<ul class="list-group">${postList}</ul>`);
-      res.send(html);
+      res.json(posts);
     }
   });
 });
 
-// Handle all other routes
+// Serve the addPost.html file
+app.get('/posts/add', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views/addPost.html'));
+});
+
+// Serve the about.html file for all other routes
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'views/about.html'));
 });
 
 // Start the server
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
