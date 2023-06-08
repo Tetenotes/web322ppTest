@@ -5,40 +5,17 @@ const fs = require('fs');
 const app = express();
 const PORT = 5500;
 
-// Serve static files from the "public" directory
-app.use(express.static(path.join(__dirname, 'public')));
+// Serve static files from the "views" directory
+app.use(express.static(path.join(__dirname, 'views')));
 
 // Serve the about page
 app.get('/about', (req, res) => {
   res.sendFile(path.join(__dirname, 'views/about.html'));
 });
 
-// Serve the categories page
-app.get('/categories', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views/categories.html'));
-});
-
-// Serve the posts page
-app.get('/posts', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views/posts.html'));
-});
-
 // Serve the add post page
 app.get('/posts/add', (req, res) => {
   res.sendFile(path.join(__dirname, 'views/addPost.html'));
-});
-
-// API endpoint to retrieve about content
-app.get('/data/about', (req, res) => {
-  const aboutPath = path.join(__dirname, 'data/about.json');
-  fs.readFile(aboutPath, 'utf8', (err, data) => {
-    if (err) {
-      console.error(err);
-      res.status(500).send('Internal Server Error');
-    } else {
-      res.json(JSON.parse(data));
-    }
-  });
 });
 
 // API endpoint to retrieve categories
