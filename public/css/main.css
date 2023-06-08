@@ -1,0 +1,37 @@
+/*styles for the Web322-APP */
+
+/* Header */
+header {
+    margin-bottom: 20px;
+  }
+  
+  /* Main content */
+  main {
+    margin-top: 70px;
+    margin-bottom: 20px;
+  }
+  
+  /* Footer */
+  footer {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+  }
+  
+  /* Return button */
+  .return-button {
+    margin-top: 20px;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 767px) {
+    /* Header */
+    .navbar-brand {
+      font-size: 1.5rem;
+    }
+  
+    /* Main content */
+    main {
+      margin-top: 60px;
+    }
+  }
+  
