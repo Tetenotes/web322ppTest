@@ -5,7 +5,7 @@ const app = express();
 const PORT = 5500;
 
 // Serve static files from the "public" directory
-app.use(express.static(path.join(__dirname, 'views')));
+app.use(express.static(path.join(__dirname, '/views')));
 
 // Serve the about.json file
 app.get('/data/about.json', (req, res) => {
@@ -22,9 +22,9 @@ app.get('/data/categories.json', (req, res) => {
   res.sendFile(path.join(__dirname, '/data/categories.json'));
 });
 
-// Handle the requests for the blog functionality
-app.get('/blog', (req, res) => {
-  res.sendFile(path.join(__dirname, '/views/about.html'));
+// Handle all other routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views/about.html'));
 });
 
 // Start the server
