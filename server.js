@@ -24,7 +24,7 @@ app.get('/data/categories.json', (req, res) => {
 
 // Handle the requests for the blog functionality
 app.get('/blog', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views/blog.html'));
+  res.sendFile(path.join(__dirname, '/views/about.html'));
 });
 
 // Start the server
