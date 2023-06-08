@@ -1,18 +1,15 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
-const cloudinary = require('cloudinary').v2;
 
 const app = express();
 const PORT = 5500;
-
 // Set up Cloudinary configuration
 cloudinary.config({
   cloud_name: 'dto94yf8f',
   api_key: '847643783243368',
   api_secret: '-iWsSZu18XeWBJVSRRQCfKw-j1w'
 });
-
 // Serve the about.html file
 app.get('/about', (req, res) => {
   res.sendFile(path.join(__dirname, 'views/about.html'));
